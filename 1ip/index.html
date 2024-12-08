@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP 查询工具</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #282c34;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url(''); /* 默认无背景图片 */
+            background-size: cover;
+            background-position: center;
+        }
+        .container {
+            text-align: center;
+            background-color: rgba(58, 63, 71, 0.8);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #61dafb;
+            margin-bottom: 20px;
+        }
+        #ip-display {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #ffffff;
+            background-color: #20232a;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: pre-line; /* 保留换行 */
+        }
+        .flag {
+            width: 50px;
+            height: auto;
+            margin-top: 10px;
+        }
+        .loader {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #61dafb;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>IP 查询工具</h1>
+        <div id="ip-display">正在获取您的 IP 地址和位置信息...</div>
+        <div class="loader" id="loader"></div>
+    </div>
+
+    <script>
+        function getIPAndLocation() {
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => {
+                    const ipInfo = `您的 IP 地址是：${data.ip}`;
+                    const locationInfo = `您所在的国家是：${data.country_name}\n` +
+                                         `城市：${data.city}`;
+                    document.getElementById('ip-display').innerText = ipInfo + '\n' + locationInfo;
+
+                    // 添加国家的国旗
+                    const flagUrl = `https://flagcdn.com/48x36/${data.country_code.toLowerCase()}.png`;
+                    const flagImg = document.createElement('img');
+                    flagImg.src = flagUrl;
+                    flagImg.alt = data.country_name + ' 国旗';
+                    flagImg.classList.add('flag');
+                    document.getElementById('ip-display').appendChild(flagImg);
+
+                    document.getElementById('loader').style.display = 'none';
+                })
+                .catch(error => {
+                    document.getElementById('ip-display').innerText = '无法获取 IP 地址和位置信息，请稍后再试。';
+                    document.getElementById('loader').style.display = 'none';
+                    console.error('Error fetching IP and location:', error);
+                });
+        }
+
+        // 在页面加载时自动调用 getIPAndLocation 函数
+        window.onload = getIPAndLocation;
+
+        // 自定义函数来设置背景图片
+        function setBackground(imageUrl) {
+            if (imageUrl) {
+                document.body.style.backgroundImage = `url('${imageUrl}')`;
+            }
+        }
+
+        // 示例：在这里设置您的背景图片 URL，如果没有则保持为空
+        setBackground('your-image-url.jpg'); // 将 'your-image-url.jpg' 替换为实际图片路径
+    </script>
+</body>
+</html>

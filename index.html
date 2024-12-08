@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网站</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #displayArea {
+            font-size: 24px;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 20px;
+            min-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>1bb        1表白<p>
+        <p>1cj          1抽奖<p>
+        <p>1cyjl       1成语接龙<p>
+        <p>1bb        1表白<p>
+        <p>1ip          IP查询<p>
+        <p>1sp         1刷视频<p>
+        <p>1yszqb   1元素周期表<p>
+        <p>1zpq       1照片墙<p>
+        <p>1zyn        1我的心里只有你<p>
+        <p> 2bb         2表白<p>
+        <p>2yszqb   2元素周期表<p>
+        <p>1sz      1时钟 <p>
+        <p>1lp      1罗盘 <p>
+        <p>1xyl     1小幽灵 <p>
+        <p>1tyx     1太阳系 <p>
+        <p>win12    Windows12<p>
+        <p>1ax     激光爱心<p>
+        <p>1pt     拼图<p>
+        
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const textInput = document.getElementById('textInput');
+            const displayArea = document.getElementById('displayArea');
+
+            textInput.addEventListener('input', function() {
+                displayArea.textContent = textInput.value;
+            });
+        });
+    </script>
+</body>
+</html>
